@@ -1,6 +1,11 @@
 import Header from "./components/Header";
+import EntryProvider from "./context/EntryContext";
 const App = () => {
-  return <Header />;
+  return (
+    <EntryProvider>
+      <Header />
+    </EntryProvider>
+  );
 };
 
 export default App;
