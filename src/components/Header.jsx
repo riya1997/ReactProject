@@ -1,9 +1,11 @@
-// import { Modal } from "flowbite-react";
 import { useState } from "react";
 import EntryForm from "./EntryForm";
 
 const Header = () => {
   const [openModal, setOpenModal] = useState(false);
+  const handleCancel = () => {
+    document.getElementById("my_modal_1").close();
+  };
   return (
     <div className="bg-gray-300 p-8 flex flex-row justify-between">
       <div>
@@ -21,30 +23,17 @@ const Header = () => {
         </button>
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box max-w-3xl">
-            <h3 className="font-bold text-2xl">Create New Entry</h3>
-            <EntryForm />
-            <div className="modal-action">
-              <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn bg-gray-400 hover:bg-gray-600">
-                  Close
-                </button>
-              </form>
-            </div>
+            <button
+              className="float-right text-xl font-bold"
+              onClick={handleCancel}
+            >
+              ✕
+            </button>
+            <h3 className="font-bold text-2xl px-25">Create New Entry</h3>
+
+            <EntryForm handleCancel={handleCancel} />
           </div>
         </dialog>
-        {/* <Modal show={openModal} onClose={() => setOpenModal(false)}>
-            <ModalHeader>Create New Entry</ModalHeader>
-            <ModalBody>
-              <EntryForm />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="alternative" onClick={() => setOpenModal(false)}>
-                Cancel
-              </Button>
-              <Button onClick={() => setOpenModal(false)}>Save Entry</Button>
-            </ModalFooter>
-          </Modal> */}
       </div>
     </div>
   );

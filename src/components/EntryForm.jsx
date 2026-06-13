@@ -8,7 +8,7 @@ const initialFormData = {
   content: "",
 };
 
-const EntryForm = () => {
+const EntryForm = ({ handleCancel }) => {
   const { addEntry } = useEntry();
   const [formData, setFormData] = useState(initialFormData);
   const [submittedData, setSubmittedData] = useState(null);
@@ -36,11 +36,13 @@ const EntryForm = () => {
         imgUrl: formData.imgUrl,
         content: formData.content,
       };
+      console.log("entry being saved:", entry);
       addEntry(entry);
       setSubmittedData(formData);
       setFormData(initialFormData);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
+      setTimeout(() => document.getElementById("my_modal_1").close(), 4000);
     } catch (error) {
       alert(error);
     }
@@ -114,6 +116,14 @@ const EntryForm = () => {
           Save Entry
         </button>
       </form>
+      <br />
+      <button
+        type="submit"
+        className="w-[100px] py-2 bg-gray-400 rounded hover:bg-gray-600"
+        onClick={handleCancel}
+      >
+        Cancel
+      </button>
     </div>
   );
 };
