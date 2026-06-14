@@ -19,7 +19,7 @@ const Header = () => {
           className="bg-gray-500 rounded-md mx-10 mt-3 p-3 font-bold"
           onClick={() => document.getElementById("my_modal_1").showModal()}
         >
-          Add New Entry
+          Add Entry
         </button>
         <dialog id="my_modal_1" className="modal">
           <div className="modal-box max-w-3xl">

@@ -14,7 +14,7 @@ function DiaryList() {
   return (
     <main className="min-h-screen bg-gray-50 p-8">
       {entries && (
-        <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {sortedEntries.map((diary) => (
             <DiaryCard
               key={diary.date}

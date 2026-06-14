@@ -1,9 +1,14 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const EntryContext = createContext();
 export default function EntryProvider({ children }) {
-  const allEntries = JSON.parse(localStorage.getItem("allentries")) || [];
-  const [entries, setEntries] = useState(allEntries);
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    const storedEntries = JSON.parse(localStorage.getItem("allentries")) || [];
+
+    setEntries(storedEntries);
+  }, []);
 
   const addEntry = (entry) => {
     const updatedEntries = [entry, ...entries];

@@ -9,7 +9,7 @@ const initialFormData = {
 };
 
 const EntryForm = ({ handleCancel }) => {
-  const { addEntry } = useEntry();
+  const { entries, addEntry } = useEntry();
   const [formData, setFormData] = useState(initialFormData);
   const [submittedData, setSubmittedData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -24,11 +24,17 @@ const EntryForm = ({ handleCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const today = new Date().toISOString().split("T")[0];
+    const dateExists = entries.some((entry) => entry.date === formData.date);
     try {
       if (!formData.title) throw new Error("Title should not be blank");
       if (!formData.date) throw new Error("Date should not be blank");
       if (!formData.imgUrl) throw new Error("Image Url should not be blank");
       if (!formData.content) throw new Error("Content should not be blank");
+      if (formData.date > today)
+        throw new Error("Date cannot be in the furture date");
+      if (dateExists)
+        throw new Error("Diary entry for entered date is already present");
 
       const entry = {
         title: formData.title,
@@ -60,7 +66,7 @@ const EntryForm = ({ handleCancel }) => {
       }}
     >
       {showSuccess && (
-        <p style={{ color: "green" }}>Dairy entry Successful!!</p>
+        <p style={{ color: "green" }}>Dairy entry Successfull!</p>
       )}
       <form onSubmit={handleSubmit}>
         <label className="block text-left font-semibold ">
@@ -116,14 +122,6 @@ const EntryForm = ({ handleCancel }) => {
           Save Entry
         </button>
       </form>
-      <br />
-      <button
-        type="submit"
-        className="w-[100px] py-2 bg-gray-400 rounded hover:bg-gray-600"
-        onClick={handleCancel}
-      >
-        Cancel
-      </button>
     </div>
   );
 };
