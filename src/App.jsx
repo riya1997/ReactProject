@@ -1,5 +1,13 @@
+import DiaryList from "./components/DiaryList";
+import Header from "./components/Header";
+import EntryProvider from "./context/EntryContext";
 const App = () => {
-  return <h1 className="text-3xl font-bold underline">React + TailwindCSS</h1>;
+  return (
+    <EntryProvider>
+      <Header />
+      <DiaryList />
+    </EntryProvider>
+  );
 };
 
 export default App;
